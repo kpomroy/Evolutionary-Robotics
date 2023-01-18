@@ -1,4 +1,3 @@
-from xml.etree.ElementInclude import include
 import pybullet as p
 import time
 
