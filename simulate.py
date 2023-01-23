@@ -11,7 +11,7 @@ p.setGravity(0,0,-9.8)
 planeId = p.loadURDF("plane.urdf")
 
 #read in the world described in box.sdf
-p.loadSDF("boxes.sdf")
+p.loadSDF("world.sdf")
 
 #loop to keep simulated environment open
 for i in range(5000):
