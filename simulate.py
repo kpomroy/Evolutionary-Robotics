@@ -13,6 +13,9 @@ planeId = p.loadURDF("plane.urdf")
 #read in the world described in box.sdf
 p.loadSDF("world.sdf")
 
+#read in the robot body to robotId object
+robotId = p.loadURDF("body.urdf")
+
 #loop to keep simulated environment open
 for i in range(5000):
     p.stepSimulation()
