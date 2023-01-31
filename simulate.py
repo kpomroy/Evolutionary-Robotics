@@ -31,11 +31,14 @@ for i in range(100):
     time.sleep(1/60)
 
     #create backleg touch sensor at each iteration of loop
+    #save to backLegSensorValues array
     backLegSensorValues[i] = pyrosim.Get_Touch_Sensor_Value_For_Link("BackLeg")
     
-outfile = open("data/BackLeg.npy", "w")
-np.save(outfile)
-outfile.close()
 print(backLegSensorValues)
+
+outfile = open("data/backLegSensorValues.npy", "wb")
+np.save(outfile, backLegSensorValues)
+outfile.close()
+
 
 p.disconnect()
