@@ -1,8 +1,9 @@
+import math
+import numpy as np
 import pybullet as p
-import time
 import pybullet_data
 import pyrosim.pyrosim as pyrosim
-import numpy as np
+import time
 
 physicsClient = p.connect(p.GUI)
 p.setAdditionalSearchPath(pybullet_data.getDataPath())
@@ -22,13 +23,13 @@ robotId = p.loadURDF("body.urdf")
 pyrosim.Prepare_To_Simulate(robotId)
 
 #create vectors of sensor values
-backLegSensorValues = np.zeros(100)
-frontLegSensorValues = np.zeros(100)
+backLegSensorValues = np.zeros(500)
+frontLegSensorValues = np.zeros(500)
 
 #loop to keep simulated environment open
-for i in range(100):
+for i in range(500):
     p.stepSimulation()
-    time.sleep(1/60)
+    time.sleep(1/100)
 
     #create backleg touch sensor at each iteration of loop
     #save to backLegSensorValues array
@@ -37,12 +38,19 @@ for i in range(100):
     #create frontleg touch sensor
     frontLegSensorValues[i] = pyrosim.Get_Touch_Sensor_Value_For_Link("FrontLeg")
 
-    #create motor for joints
+    #create motors for joints
     pyrosim.Set_Motor_For_Joint(
         bodyIndex = robotId,
         jointName = b'Torso_BackLeg',
         controlMode = p.POSITION_CONTROL,
-        targetPosition = 0.0,
+        targetPosition = -(math.pi/4.0),
+        maxForce = 500)
+
+    pyrosim.Set_Motor_For_Joint(
+        bodyIndex = robotId,
+        jointName = b'Torso_FrontLeg',
+        controlMode = p.POSITION_CONTROL,
+        targetPosition = (math.pi/4.0),
         maxForce = 500)
     
 print(backLegSensorValues)
