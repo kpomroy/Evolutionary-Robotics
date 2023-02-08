@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as matplotlib
 
-backLegSensorValues = np.load("data/backLegSensorValues.npy")
+""" backLegSensorValues = np.load("data/backLegSensorValues.npy")
 
 frontLegSensorValues = np.load("data/frontLegSensorValues.npy")
 
@@ -15,4 +15,12 @@ matplotlib.plot(frontLegSensorValues, label = "Front Leg")
 matplotlib.legend()
 
 #show plot
+matplotlib.show() """
+
+targetAnglesValues = np.load("data/targetAngleValues.npy")
+
+matplotlib.plot(targetAnglesValues, label = "Target Angles")
+
+matplotlib.legend()
+
 matplotlib.show()

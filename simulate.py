@@ -29,6 +29,18 @@ pyrosim.Prepare_To_Simulate(robotId)
 backLegSensorValues = np.zeros(500)
 frontLegSensorValues = np.zeros(500)
 
+#sinusoidal taarget angles vector
+print(np.sin(0))
+print(np.sin(PI/2))
+radianValues = np.linspace(0, 2*PI, num = 500)
+targetAngles = np.sin(radianValues)
+
+#plot sinusoidal values
+targetAnglesData = open("data/targetAngleValues.npy", "wb")
+np.save(targetAnglesData, targetAngles)
+targetAnglesData.close()
+
+exit()
 #loop to keep simulated environment open
 for i in range(500):
     p.stepSimulation()
