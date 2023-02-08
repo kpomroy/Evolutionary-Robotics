@@ -6,8 +6,6 @@ import pyrosim.pyrosim as pyrosim
 import random
 import time
 
-PI = math.pi
-
 physicsClient = p.connect(p.GUI)
 p.setAdditionalSearchPath(pybullet_data.getDataPath())
 
@@ -26,25 +24,24 @@ robotId = p.loadURDF("body.urdf")
 pyrosim.Prepare_To_Simulate(robotId)
 
 #create vectors of sensor values
-backLegSensorValues = np.zeros(500)
-frontLegSensorValues = np.zeros(500)
+backLegSensorValues = np.zeros(1000)
+frontLegSensorValues = np.zeros(1000)
 
-#sinusoidal taarget angles vector
-print(np.sin(0))
-print(np.sin(PI/2))
-radianValues = np.linspace(0, 2*PI, num = 500)
-targetAngles = np.sin(radianValues)
+#sinusoidal target angles vector (motor command vector)
+radianValues = np.linspace(0, 2*np.pi, num = 1000)
+targetAngles = (np.pi/4)*np.sin(radianValues)
 
+'''
 #plot sinusoidal values
 targetAnglesData = open("data/targetAngleValues.npy", "wb")
 np.save(targetAnglesData, targetAngles)
 targetAnglesData.close()
+'''
 
-exit()
 #loop to keep simulated environment open
-for i in range(500):
+for i in range(1000):
     p.stepSimulation()
-    time.sleep(1/100)
+    time.sleep(1/1000)
 
     #create backleg touch sensor at each iteration of loop
     #save to backLegSensorValues array
@@ -58,14 +55,14 @@ for i in range(500):
         bodyIndex = robotId,
         jointName = b'Torso_BackLeg',
         controlMode = p.POSITION_CONTROL,
-        targetPosition = random.uniform(-PI/2, PI/2),
+        targetPosition = targetAngles[i],
         maxForce = 50)
 
     pyrosim.Set_Motor_For_Joint(
         bodyIndex = robotId,
         jointName = b'Torso_FrontLeg',
         controlMode = p.POSITION_CONTROL,
-        targetPosition = random.uniform(-PI/2, PI/2),
+        targetPosition = targetAngles[i],
         maxForce = 50)
 
 print(backLegSensorValues)
