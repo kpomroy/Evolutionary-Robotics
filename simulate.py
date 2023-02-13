@@ -1,10 +1,11 @@
-import math
+import constants as c
 import numpy as np
 import pybullet as p
 import pybullet_data
 import pyrosim.pyrosim as pyrosim
-import random
 import time
+
+
 
 physicsClient = p.connect(p.GUI)
 p.setAdditionalSearchPath(pybullet_data.getDataPath())
@@ -24,22 +25,36 @@ robotId = p.loadURDF("body.urdf")
 pyrosim.Prepare_To_Simulate(robotId)
 
 #create vectors of sensor values
-backLegSensorValues = np.zeros(1000)
-frontLegSensorValues = np.zeros(1000)
+backLegSensorValues = np.zeros(c.steps)
+frontLegSensorValues = np.zeros(c.steps)
 
-#sinusoidal target angles vector (motor command vector)
-radianValues = np.linspace(0, 2*np.pi, num = 1000)
-targetAngles = (np.pi/4)*np.sin(radianValues)
+#back leg sinusoidal target angles vector (motor command vector)
+backLegTargetAngles = np.zeros(c.steps)
+backLegRadianValues = np.linspace(0, 2*np.pi, num = c.steps)
+for i in range(c.steps):
+    backLegTargetAngles[i] = c.backLegAmplitude*np.sin(c.backLegFrequency*backLegRadianValues[i] + c.backLegPhaseOffset)
 
-'''
+#front legsinusoidal target angles vector (motor command vector)
+frontLegTargetAngles = np.zeros(c.steps)
+frontLegRadianValues = np.linspace(0, 2*np.pi, num = c.steps)
+for i in range(c.steps):
+    frontLegTargetAngles[i] = c.frontLegAmplitude*np.sin(c.frontLegFrequency*frontLegRadianValues[i] + c.frontLegPhaseOffset)
+
+
 #plot sinusoidal values
 targetAnglesData = open("data/targetAngleValues.npy", "wb")
-np.save(targetAnglesData, targetAngles)
+np.save(targetAnglesData, backLegTargetAngles)
 targetAnglesData.close()
+
+'''
+frontLegTargetAnglesData = open("data/frontLegTargetAngleValues.npy", "wb")
+np.save(frontLegTargetAnglesData, frontLegTargetAngles)
+frontLegTargetAnglesData.close()
+exit()
 '''
 
 #loop to keep simulated environment open
-for i in range(1000):
+for i in range(c.steps):
     p.stepSimulation()
     time.sleep(1/1000)
 
@@ -55,14 +70,14 @@ for i in range(1000):
         bodyIndex = robotId,
         jointName = b'Torso_BackLeg',
         controlMode = p.POSITION_CONTROL,
-        targetPosition = targetAngles[i],
+        targetPosition = backLegTargetAngles[i],
         maxForce = 50)
 
     pyrosim.Set_Motor_For_Joint(
         bodyIndex = robotId,
         jointName = b'Torso_FrontLeg',
         controlMode = p.POSITION_CONTROL,
-        targetPosition = targetAngles[i],
+        targetPosition = frontLegTargetAngles[i],
         maxForce = 50)
 
 print(backLegSensorValues)
