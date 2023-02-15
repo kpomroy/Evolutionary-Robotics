@@ -30,6 +30,10 @@ class SIMULATION:
         #read in the world described in box.sdf
         p.loadSDF("world.sdf")
 
+    #deconstructor
+    def __del__(self):
+        p.disconnect()
+
     def run(self):
         #loop to keep simulated environment open
         for i in range(c.steps):
@@ -61,3 +65,5 @@ class SIMULATION:
                 targetPosition = frontLegTargetAngles[i],
                 maxForce = 50)
                 '''
+
+    
