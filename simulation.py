@@ -9,20 +9,14 @@ import time
 
 class SIMULATION:
     def __init__(self):
-        self.world = WORLD()
-        self.robot = ROBOT()
-
         physicsClient = p.connect(p.GUI)
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
 
+        self.world = WORLD()
+        self.robot = ROBOT()
+
         #set gravity
         p.setGravity(0,0,-9.8)
-
-        #read in the robot body to robotId object
-        self.robotId = p.loadURDF("body.urdf")
-
-        #prepare to simulate sensors
-        pyrosim.Prepare_To_Simulate(self.robotId)
 
          #create floor
         self.planeId = p.loadURDF("plane.urdf")

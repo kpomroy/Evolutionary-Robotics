@@ -20,7 +20,7 @@ matplotlib.show() """
 targetAngleValues = np.load("data/targetAngleValues.npy")
 frontLegTargetAngleValues = np.load("data/frontLegTargetAngleValues.npy")
 
-matplotlib.plot(targetAngleValues, label = "Back Leg")
+matplotlib.plot(targetAngleValues, label = "Back Legs")
 matplotlib.plot(frontLegTargetAngleValues, label = "Front Leg")
 
 matplotlib.legend()
