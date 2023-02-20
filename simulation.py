@@ -31,10 +31,8 @@ class SIMULATION:
 
     def run(self):
         #loop to keep simulated environment open
-        for i in range(c.steps):
+        for t in range(c.steps):
             p.stepSimulation()
-            self.robot.Sense(i)
-            self.robot.Act(i)
-            time.sleep(1/1000)
-
-    
+            self.robot.Sense(t)
+            self.robot.Act(t)
+            time.sleep(1/100)

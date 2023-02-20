@@ -6,11 +6,15 @@ import pyrosim.pyrosim as pyrosim
 class MOTOR:
     def __init__(self, jointName):
         self.jointName = jointName
+        print(self.jointName)
         self.Prepare_To_Act()
     
     def Prepare_To_Act(self):
+        if (self.jointName == b'Torso_BackLeg'):
+            self.frequency = c.backLegFrequency/2
+        else:
+            self.frequency = c.backLegFrequency
         self.amplitude = c.backLegAmplitude
-        self.frequency = c.backLegFrequency
         self.offset = c.backLegPhaseOffset
 
         self.radianValues = np.linspace(0, 2 * np.pi, num = c.steps)
