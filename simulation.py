@@ -1,4 +1,5 @@
 import constants as c
+import motor
 import numpy as np
 import pybullet as p
 import pybullet_data
@@ -33,25 +34,7 @@ class SIMULATION:
         for i in range(c.steps):
             p.stepSimulation()
             self.robot.Sense(i)
+            self.robot.Act(i)
             time.sleep(1/1000)
-
-'''
-            
-
-            #create motors for joints
-            pyrosim.Set_Motor_For_Joint(
-                bodyIndex = robotId,
-                jointName = b'Torso_BackLeg',
-                controlMode = p.POSITION_CONTROL,
-                targetPosition = backLegTargetAngles[i],
-                maxForce = 50)
-
-            pyrosim.Set_Motor_For_Joint(
-                bodyIndex = robotId,
-                jointName = b'Torso_FrontLeg',
-                controlMode = p.POSITION_CONTROL,
-                targetPosition = frontLegTargetAngles[i],
-                maxForce = 50)
-                '''
 
     
