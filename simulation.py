@@ -31,18 +31,12 @@ class SIMULATION:
     def run(self):
         #loop to keep simulated environment open
         for i in range(c.steps):
-            #print (i)
-            
             p.stepSimulation()
+            self.robot.Sense(i)
             time.sleep(1/1000)
 
 '''
-            #create backleg touch sensor at each iteration of loop
-            #save to backLegSensorValues array
-            backLegSensorValues[i] = pyrosim.Get_Touch_Sensor_Value_For_Link("BackLeg")
-
-            #create frontleg touch sensor
-            frontLegSensorValues[i] = pyrosim.Get_Touch_Sensor_Value_For_Link("FrontLeg")
+            
 
             #create motors for joints
             pyrosim.Set_Motor_For_Joint(

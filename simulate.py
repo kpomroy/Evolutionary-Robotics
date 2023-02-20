@@ -12,11 +12,6 @@ import pyrosim.pyrosim as pyrosim
 import time
 
 
-
-#create vectors of sensor values
-backLegSensorValues = np.zeros(c.steps)
-frontLegSensorValues = np.zeros(c.steps)
-
 #back leg sinusoidal target angles vector (motor command vector)
 backLegTargetAngles = np.zeros(c.steps)
 backLegRadianValues = np.linspace(0, 2*np.pi, num = c.steps)

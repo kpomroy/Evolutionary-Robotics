@@ -1,3 +1,5 @@
+import constants as c
+import numpy as np
 import pybullet as p
 import pyrosim.pyrosim as pyrosim
 from sensor import SENSOR
@@ -11,8 +13,12 @@ class ROBOT:
         #prepare to simulate sensors
         pyrosim.Prepare_To_Simulate(self.robotId)
         self.Prepare_To_Sense()
-
+        
     def Prepare_To_Sense(self):
         self.sensors = {}
         for linkName in pyrosim.linkNamesToIndices:
             self.sensors[linkName] = SENSOR(linkName)
+
+    def Sense(self, t):
+        for i in self.sensors:
+            self.sensors[i].Get_Value(t)
