@@ -2,6 +2,7 @@ import constants as c
 from motor import MOTOR 
 import numpy as np
 import pybullet as p
+import pybullet_data
 import pyrosim.pyrosim as pyrosim
 from sensor import SENSOR
 

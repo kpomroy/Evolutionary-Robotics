@@ -6,5 +6,5 @@ backLegPhaseOffset = .25
 frontLegAmplitude = np.pi/4
 frontLegFrequency = 5
 frontLegPhaseOffset = 0
-steps = 1000
+steps = 500
 motorMaxForce = 50
