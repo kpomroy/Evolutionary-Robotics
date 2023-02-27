@@ -9,8 +9,6 @@ class SENSOR:
         self.values = np.zeros(c.steps)
 
     def Get_Value(self, time):
-        #create touch sensor at each iteration of loop
-        #save to this.values array
         self.values[time] = pyrosim.Get_Touch_Sensor_Value_For_Link(self.linkName)
         if (time == c.steps-1):
             print (self.values)
