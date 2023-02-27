@@ -8,14 +8,6 @@ class MOTOR:
         self.jointName = jointName
         print(self.jointName)
         self.Prepare_To_Act()
-    
-    def Prepare_To_Act(self):
-        self.frequency = c.backLegFrequency
-        self.amplitude = c.backLegAmplitude
-        self.offset = c.backLegPhaseOffset
-
-        self.radianValues = np.linspace(0, 2 * np.pi, num = c.steps)
-        self.motorValues = self.amplitude * np.sin(self.frequency * self.radianValues + self.offset)
 
     def Set_Value(self, robot, desiredAngle):
         pyrosim.Set_Motor_For_Joint(
@@ -24,11 +16,3 @@ class MOTOR:
             controlMode = p.POSITION_CONTROL,
             targetPosition = desiredAngle,
             maxForce = c.motorMaxForce)
-            
-    def Save_Value(self):
-        targetAnglesData = open("data/" + self.jointName + ".npy", "wb")
-        np.save(targetAnglesData, self.motorValues)
-        targetAnglesData.close()
-
-    def Get_Joint_Name(self):
-        return self.jointName
