@@ -30,4 +30,4 @@ class SIMULATION:
             self.robot.Sense(t)
             self.robot.Think()
             self.robot.Act(t)
-            time.sleep(1/100)
+            time.sleep(1/1000)
