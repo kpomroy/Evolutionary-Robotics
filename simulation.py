@@ -31,3 +31,6 @@ class SIMULATION:
             self.robot.Think()
             self.robot.Act(t)
             time.sleep(1/1000)
+
+    def Get_Fitness(self):
+        self.robot.Get_Fitness()
