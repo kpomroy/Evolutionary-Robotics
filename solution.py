@@ -14,13 +14,13 @@ class SOLUTION:
         #scale weights to be between -1 and 1
         self.weights = self.weights * 2 - 1
 
-    def Evaluate(self):
+    def Evaluate(self, directOrGUI):
         self.Create_World()
         self.Create_Body()
         self.Create_Brain()
-        os.system("python3 simulate.py DIRECT")
+        os.system("python3 simulate.py " + directOrGUI)
         fitnessFile = open("fitness.txt", "r")
-        self.fitness = fitnessFile.read()
+        self.fitness = float(fitnessFile.read())
         fitnessFile.close()
         
 
