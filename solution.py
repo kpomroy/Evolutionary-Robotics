@@ -13,17 +13,15 @@ class SOLUTION:
                 self.weights[i][j] = numpy.random.rand()
         #scale weights to be between -1 and 1
         self.weights = self.weights * 2 - 1
-        print(self.weights)
 
     def Evaluate(self):
         self.Create_World()
         self.Create_Body()
         self.Create_Brain()
         os.system("python3 simulate.py")
-        fitness = open("fitness.txt", "r")
-        self.fitness = fitness.read()
-        print(self.fitness)
-        fitness.close()
+        fitnessFile = open("fitness.txt", "r")
+        self.fitness = fitnessFile.read()
+        fitnessFile.close()
         
 
     def Create_World(self):
