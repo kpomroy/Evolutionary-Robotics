@@ -2,6 +2,7 @@ import numpy as numpy
 from generate import Create_World
 import os as os
 import pyrosim.pyrosim as pyrosim
+import random
 
 class SOLUTION:
     def __init__(self):
@@ -61,4 +62,8 @@ class SOLUTION:
 
         pyrosim.End()
 
+    def Mutate(self):
+        randRow = random.randint(0,2)
+        randCol = random.randint(0,1)
+        self.weights[randRow][randCol] = random.random() * 2 - 1
   
