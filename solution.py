@@ -19,6 +19,11 @@ class SOLUTION:
         self.Create_Body()
         self.Create_Brain()
         os.system("python3 simulate.py")
+        fitness = open("fitness.txt", "r")
+        self.fitness = fitness.read()
+        print(self.fitness)
+        fitness.close()
+        
 
     def Create_World(self):
         pyrosim.Start_SDF("world.sdf")
