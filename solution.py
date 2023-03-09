@@ -18,7 +18,7 @@ class SOLUTION:
         self.Create_World()
         self.Create_Body()
         self.Create_Brain()
-        os.system("python3 simulate.py")
+        os.system("python3 simulate.py DIRECT")
         fitnessFile = open("fitness.txt", "r")
         self.fitness = fitnessFile.read()
         fitnessFile.close()
