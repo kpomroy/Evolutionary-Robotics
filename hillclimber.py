@@ -8,8 +8,9 @@ class HILL_CLIMBER:
         
 
     def Evolve(self):
-        self.parent.Evaluate("DIRECT")
+        self.parent.Evaluate("GUI")
         for currentGeneration in range(0, c.numberOfGenerations):
+            #if(currentGeneration == 0):
             self.Evolve_For_One_Generation()
 
     def Evolve_For_One_Generation(self):
@@ -37,3 +38,6 @@ class HILL_CLIMBER:
         print("")
         print("Parent fitness: " + str(self.parent.fitness) + " Child fitness: " + str(self.child.fitness))
         print("")
+
+    def Show_Best(self):
+        self.parent.Evaluate("GUI")
