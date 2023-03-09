@@ -28,11 +28,8 @@ class HILL_CLIMBER:
         self.child.Mutate()
 
     def Select(self):
-        print("self.parent.fitness: " + str(self.parent.fitness))
-        print("self.child.fitness: " + str(self.child.fitness))
         if(self.parent.fitness > self.child.fitness):
             self.parent = self.child
-            print("parent replaced by child")
 
     def Print(self):
         print("")
