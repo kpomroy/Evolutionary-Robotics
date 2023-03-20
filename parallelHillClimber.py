@@ -8,18 +8,14 @@ class PARALLEL_HILL_CLIMBER:
         os.system("rm brain*.nndf")
         os.system("rm fitness*.txt")
         self.nextAvailableID = 0
-        self.parent = {}
+        self.parents = {}
         for i in range (c.populationSize):
-            self.parent[i] = SOLUTION(self.nextAvailableID)
+            self.parents[i] = SOLUTION(self.nextAvailableID)
             self.nextAvailableID = self.nextAvailableID + 1
         
 
     def Evolve(self):
-        for i in range(c.populationSize):
-            self.parent[i].Start_Simulation("DIRECT")
-        for i in range(c.populationSize):
-            self.parent[i].Wait_For_Simulation_To_End()
-
+        self.Evaluate(self.parents)
         #self.parent.Evaluate("GUI")
         for currentGeneration in range(0, c.numberOfGenerations):
             #if(currentGeneration == 0):
@@ -29,21 +25,21 @@ class PARALLEL_HILL_CLIMBER:
     def Evolve_For_One_Generation(self):
         self.Spawn()
         self.Mutate()
-        # self.child.Evaluate("DIRECT")
-        # self.Print()
+        self.Evaluate(self.children)
+        self.Print()
         # self.Select()
         
 
     def Spawn(self):
         self.children = {}
-        for i in range (len(self.parent)):
-            self.children[i] = copy.deepcopy(self.parent[i])
+        for i in range (len(self.parents)):
+            self.children[i] = copy.deepcopy(self.parents[i])
             self.children[i].Set_ID(self.nextAvailableID)
             self.nextAvailableID = self.nextAvailableID + 1
         
 
     def Mutate(self):
-        for i in range (len(self.parent)):
+        for i in range (len(self.parents)):
             self.children[i].Mutate()
 
     def Select(self):
@@ -52,9 +48,16 @@ class PARALLEL_HILL_CLIMBER:
 
     def Print(self):
         print("")
-        print("Parent fitness: " + str(self.parent.fitness) + " Child fitness: " + str(self.child.fitness))
+        for i in range (len(self.parents)):
+            print("Parent fitness: " + str(self.parents[i].fitness) + " Child fitness: " + str(self.children[i].fitness))
         print("")
 
     def Show_Best(self):
         pass
         #self.parent.Evaluate("GUI")
+
+    def Evaluate(self, solutions):
+        for i in range(c.populationSize):
+            solutions[i].Start_Simulation("DIRECT")
+        for i in range(c.populationSize):
+            solutions[i].Wait_For_Simulation_To_End()

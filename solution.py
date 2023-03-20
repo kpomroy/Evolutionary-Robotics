@@ -40,7 +40,7 @@ class SOLUTION:
             time.sleep(0.01)
         fitnessFile = open("fitness" + str(self.myID) + ".txt", "r")
         self.fitness = float(fitnessFile.read())
-        print(self.fitness)
+        #print(self.fitness)
         fitnessFile.close()
         os.system("rm fitness" + str(self.myID) + ".txt")
         
