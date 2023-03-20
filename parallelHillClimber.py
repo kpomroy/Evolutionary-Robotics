@@ -32,30 +32,39 @@ class PARALLEL_HILL_CLIMBER:
 
     def Spawn(self):
         self.children = {}
-        for i in range (len(self.parents)):
+        for i in self.parents:
             self.children[i] = copy.deepcopy(self.parents[i])
             self.children[i].Set_ID(self.nextAvailableID)
             self.nextAvailableID = self.nextAvailableID + 1
         
 
     def Mutate(self):
-        for i in range (len(self.parents)):
+        for i in self.parents:
             self.children[i].Mutate()
 
     def Select(self):
-        for i in range (len(self.parents)):
+        for i in self.parents:
             if(self.parents[i].fitness > self.children[i].fitness):
                 self.parents[i] = self.children[i]
 
     def Print(self):
         print("")
-        for i in range (len(self.parents)):
+        for i in self.parents:
             print(str(i) + "Parent fitness: " + str(self.parents[i].fitness) + " Child fitness: " + str(self.children[i].fitness))
         print("")
 
     def Show_Best(self):
-        pass
-        #self.parent.Evaluate("GUI")
+        #initialize lowest (best) fitness
+        bestFitness = self.parents[0].fitness
+        bestSolution = self.parents[0]
+        for i in self.parents:
+            if self.parents[i].fitness < bestFitness:
+                bestFitness = self.parents[i].fitness
+                bestSolution = self.parents[i]
+        bestSolution.Start_Simulation("GUI")
+        print("")
+        print("Best fitness:", bestFitness)
+        print("")
 
     def Evaluate(self, solutions):
         for i in range(c.populationSize):
