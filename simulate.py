@@ -12,6 +12,7 @@ except:
     solutionID = 0
 
 simulation = SIMULATION(directOrGUI, solutionID)
+
 simulation.Run()
 simulation.Get_Fitness()
-print("FINISHED")
+#print("FINISHED")

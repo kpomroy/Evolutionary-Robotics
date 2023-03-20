@@ -10,6 +10,7 @@ from sensor import SENSOR
 
 class ROBOT:
     def __init__(self, solutionID):
+        self.solutionID = solutionID
         #read in the robot body to robot object
         self.robot = p.loadURDF("body.urdf")
 
@@ -61,7 +62,10 @@ class ROBOT:
         stateOfLinkZero = p.getLinkState(self.robot,0)
         positionOfLinkZero = stateOfLinkZero[0]
         xCoordinateOfLinkZero = positionOfLinkZero[0]
-        fitnessOut = open("fitness.txt", "w")
+        fitnessOut = open("tmp" + str(self.solutionID) + ".txt", "w")
+        #fitnessOut = open("fitness" + str(self.solutionID) + ".txt", "w")
         fitnessOut.write(str(xCoordinateOfLinkZero))
         fitnessOut.close()
+
+        os.rename("tmp" + str(self.solutionID) + ".txt", "fitness" + str(self.solutionID) + ".txt")
         

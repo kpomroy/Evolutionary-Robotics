@@ -3,6 +3,7 @@ from generate import Create_World
 import os as os
 import pyrosim.pyrosim as pyrosim
 import random
+import time
 
 class SOLUTION:
     def __init__(self, nextAvailableID):
@@ -15,14 +16,33 @@ class SOLUTION:
         #scale weights to be between -1 and 1
         self.weights = self.weights * 2 - 1
 
-    def Evaluate(self, directOrGUI):
+    # def Evaluate(self, directOrGUI):
+    #     self.Create_World()
+    #     self.Create_Body()
+    #     self.Create_Brain()
+    #     os.system("python3 simulate.py " + directOrGUI + " " + str(self.myID) + " &")
+    #     fitnessFile = open("fitness" + str(self.myID) + ".txt", "r")
+    #     while not os.path.exists(fitnessFile):
+    #         time.sleep(0.01)
+    #     self.fitness = float(fitnessFile.read())
+    #     print(self.fitness)
+    #     fitnessFile.close()
+
+
+    def Start_Simulation(self, directOrGUI):
         self.Create_World()
         self.Create_Body()
         self.Create_Brain()
         os.system("python3 simulate.py " + directOrGUI + " " + str(self.myID) + " &")
-        fitnessFile = open("fitness.txt", "r")
+
+    def Wait_For_Simulation_To_End(self):
+        while not os.path.exists("fitness" + str(self.myID) + ".txt"):
+            time.sleep(0.01)
+        fitnessFile = open("fitness" + str(self.myID) + ".txt", "r")
         self.fitness = float(fitnessFile.read())
+        print(self.fitness)
         fitnessFile.close()
+        os.system("rm fitness" + str(self.myID) + ".txt")
         
 
     def Create_World(self):
