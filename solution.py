@@ -5,7 +5,8 @@ import pyrosim.pyrosim as pyrosim
 import random
 
 class SOLUTION:
-    def __init__(self):
+    def __init__(self, nextAvailableID):
+        self.myID = nextAvailableID
         #create matrix of weights between 0 and 1
         self.weights = numpy.zeros(shape = (3,2))
         for i in range(3):
@@ -18,7 +19,7 @@ class SOLUTION:
         self.Create_World()
         self.Create_Body()
         self.Create_Brain()
-        os.system("python3 simulate.py " + directOrGUI + " &")
+        os.system("python3 simulate.py " + directOrGUI + " " + str(self.myID) + " &")
         fitnessFile = open("fitness.txt", "r")
         self.fitness = float(fitnessFile.read())
         fitnessFile.close()
@@ -45,7 +46,7 @@ class SOLUTION:
         pyrosim.End()
 
     def Create_Brain(self):
-        pyrosim.Start_NeuralNetwork("brain.nndf")
+        pyrosim.Start_NeuralNetwork("brain" + str(self.myID) + ".nndf")
 
         pyrosim.Send_Sensor_Neuron(name = 0, linkName = "Torso")
         pyrosim.Send_Sensor_Neuron(name = 1, linkName = "BackLeg")
@@ -65,3 +66,5 @@ class SOLUTION:
         randCol = random.randint(0,1)
         self.weights[randRow][randCol] = random.random() * 2 - 1
   
+    def Set_ID(self, nextAvailableID):
+        self.myID = nextAvailableID

@@ -6,7 +6,12 @@ try:
 except:
     directOrGUI = "GUI"
 
-simulation = SIMULATION(directOrGUI)
+try:
+    solutionID = sys.argv[2]
+except:
+    solutionID = 0
+
+simulation = SIMULATION(directOrGUI, solutionID)
 simulation.Run()
 simulation.Get_Fitness()
 print("FINISHED")
