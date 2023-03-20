@@ -8,4 +8,4 @@ frontLegFrequency = 5
 frontLegPhaseOffset = .25
 steps = 3000
 motorMaxForce = 50
-numberOfGenerations = 20
+numberOfGenerations = 100
