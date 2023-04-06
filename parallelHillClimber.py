@@ -4,6 +4,7 @@ import os
 from solution import SOLUTION
 
 class PARALLEL_HILL_CLIMBER:
+
     def __init__(self):
         os.system("rm brain*.nndf")
         os.system("rm fitness*.txt")
@@ -64,10 +65,15 @@ class PARALLEL_HILL_CLIMBER:
         bestSolution.Start_Simulation("GUI")
         print("")
         print("Best fitness:", bestFitness)
-        print("")
+        print("Best solution ID: " + str(bestSolution.myID))
+
+        for i in range(c.populationSize * (c.numberOfGenerations+1)):
+            if(i != bestSolution.myID):
+                os.system("rm brain" + str(i) + ".nndf")
 
     def Evaluate(self, solutions):
         for i in range(c.populationSize):
             solutions[i].Start_Simulation("DIRECT")
         for i in range(c.populationSize):
             solutions[i].Wait_For_Simulation_To_End()
+    

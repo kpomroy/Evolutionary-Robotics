@@ -22,7 +22,7 @@ class ROBOT:
         self.nn = NEURAL_NETWORK("brain" + str(solutionID) + ".nndf")
 
         #delete brainID.nndf
-        os.system("rm brain" + str(solutionID) + ".nndf")
+        #os.system("rm brain" + str(solutionID) + ".nndf")
         
     def Prepare_To_Sense(self):
 
