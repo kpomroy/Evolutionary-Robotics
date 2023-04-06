@@ -47,6 +47,11 @@ class PARALLEL_HILL_CLIMBER:
         for i in self.parents:
             if(self.parents[i].fitness > self.children[i].fitness):
                 self.parents[i] = self.children[i]
+                deleteID = self.parents[i].myID
+                os.system("rm brain" + str(deleteID) + ".nndf")
+            else:
+                deleteID = self.children[i].myID
+                os.system("rm brain" + str(deleteID) + ".nndf")
 
     def Print(self):
         print("")
@@ -66,10 +71,6 @@ class PARALLEL_HILL_CLIMBER:
         print("")
         print("Best fitness:", bestFitness)
         print("Best solution ID: " + str(bestSolution.myID))
-
-        for i in range(c.populationSize * (c.numberOfGenerations+1)):
-            if(i != bestSolution.myID):
-                os.system("rm brain" + str(i) + ".nndf")
 
     def Evaluate(self, solutions):
         for i in range(c.populationSize):
