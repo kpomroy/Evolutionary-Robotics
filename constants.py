@@ -10,8 +10,8 @@ frontLegPhaseOffset = .25
 """
 steps = 2000
 motorMaxForce = 50
-numberOfGenerations = 10
+numberOfGenerations = 15
 populationSize = 10
 numSensorNeurons = 17
 numMotorNeurons = 16
-motorJointRange = 0.2
+motorJointRange = .35
