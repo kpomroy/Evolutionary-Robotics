@@ -54,10 +54,10 @@ class PARALLEL_HILL_CLIMBER:
                 os.system("rm brain" + str(deleteID) + ".nndf")
 
     def Print(self):
-        print("")
+        allFitnessFile = open("octopod1Fitness.txt", "a")
         for i in self.parents:
-            print(str(i) + "Parent fitness: " + str(self.parents[i].fitness) + " Child fitness: " + str(self.children[i].fitness))
-        print("")
+            allFitnessFile.write("Family: " + str(i) + " Parent fitness: " + str(self.parents[i].fitness) + " Child fitness: " + str(self.children[i].fitness) + "\n")
+        allFitnessFile.close()
 
     def Show_Best(self):
         #initialize lowest (best) fitness

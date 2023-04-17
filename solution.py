@@ -1,6 +1,5 @@
 import constants as c
 import numpy as numpy
-#from generate import Create_World
 import os as os
 import pyrosim.pyrosim as pyrosim
 import random
@@ -32,7 +31,6 @@ class SOLUTION:
         #print(self.fitness)
         fitnessFile.close()
         os.system("rm fitness" + str(self.myID) + ".txt")
-        
 
     def Create_World(self):
         pyrosim.Start_SDF("world.sdf")
