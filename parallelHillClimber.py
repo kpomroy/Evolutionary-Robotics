@@ -54,9 +54,11 @@ class PARALLEL_HILL_CLIMBER:
                 os.system("rm brain" + str(deleteID) + ".nndf")
 
     def Print(self):
-        allFitnessFile = open("octopod1Fitness.txt", "a")
+        allFitnessFile = open("octopod1Fitness.csv", "a")
+        if (os.stat("octopod1Fitness.csv").st_size == 0):
+            allFitnessFile.write("Family,Parent,Child\n")
         for i in self.parents:
-            allFitnessFile.write("Family: " + str(i) + " Parent fitness: " + str(self.parents[i].fitness) + " Child fitness: " + str(self.children[i].fitness) + "\n")
+            allFitnessFile.write(str(i) + "," + str(self.parents[i].fitness) + "," + str(self.children[i].fitness) + "\n")
         allFitnessFile.close()
 
     def Show_Best(self):
