@@ -54,14 +54,14 @@ class PARALLEL_HILL_CLIMBER:
                 os.system("rm brain" + str(deleteID) + ".nndf")
 
     def Print(self):
-        allFitnessFile = open("octopod1Fitness.csv", "a")
-        if (os.stat("octopod1Fitness.csv").st_size == 0):
+        allFitnessFile = open("finalProject/fitness/octopod2Fitness.csv", "a")
+        if (os.stat("finalProject/fitness/octopod2Fitness.csv").st_size == 0):
             allFitnessFile.write("Family,Parent,Child\n")
         for i in self.parents:
             allFitnessFile.write(str(i) + "," + str(self.parents[i].fitness) + "," + str(self.children[i].fitness) + "\n")
         allFitnessFile.close()
 
-    def Show_Best(self):
+    def Show_Best(self, num):
         #initialize lowest (best) fitness
         bestFitness = self.parents[0].fitness
         bestSolution = self.parents[0]
@@ -73,7 +73,11 @@ class PARALLEL_HILL_CLIMBER:
         print("")
         print("Best fitness:", bestFitness)
         print("Best solution ID: " + str(bestSolution.myID))
-
+        print("i: " + str(num))
+        print("")
+        #move best brain to brains folder to save
+        os.system('mv brain' + str(bestSolution.myID) + '.nndf finalProject/brains/octopod2/brain' + str(num) + '.nndf')
+        
     def Evaluate(self, solutions):
         for i in range(c.populationSize):
             solutions[i].Start_Simulation("DIRECT")
