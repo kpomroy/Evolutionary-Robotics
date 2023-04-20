@@ -6,13 +6,14 @@ from solution import SOLUTION
 
 class PARALLEL_HILL_CLIMBER:
 
-    def __init__(self):
+    def __init__(self, iteration):
         os.system("rm brain*.nndf")
         os.system("rm fitness*.txt")
         #create matrix for fitnesses
-        self.fitnessMat = np.zeros((c.populationSize,c.numberOfGenerations))
-        print(self.fitnessMat)
+        self.fitnessMat = np.zeros(shape = (c.populationSize,c.numberOfGenerations))
         self.nextAvailableID = 0
+        self.generation = 0
+        self.iteration = iteration
         self.parents = {}
         for i in range (c.populationSize):
             self.parents[i] = SOLUTION(self.nextAvailableID)
@@ -48,25 +49,36 @@ class PARALLEL_HILL_CLIMBER:
             self.children[i].Mutate()
 
     def Select(self):
+        
         for i in self.parents:
+            self.fitnessMat[i][self.generation] = self.children[i].fitness
             if(self.parents[i].fitness > self.children[i].fitness):
+                #replace parent with child if more fit
                 self.parents[i] = self.children[i]
+                #delete brain file
                 deleteID = self.parents[i].myID
                 os.system("rm brain" + str(deleteID) + ".nndf")
             else:
+                #self.fitnessMat[i][self.generation] = self.parents[i].fitness
+                #delete brain file
                 deleteID = self.children[i].myID
                 os.system("rm brain" + str(deleteID) + ".nndf")
+        self.generation+=1
+
+        if(self.generation == c.numberOfGenerations-1):
+            np.savetxt('finalProject/fitness/octopod1' + str(self.iteration) + '.txt' ,self.fitnessMat, fmt = '%.4f')
+
 
     def Print(self):
         # write to csv
-        allFitnessFile = open("finalProject/fitness/octopod1Fitness.csv", "a")
-        if (os.stat("finalProject/fitness/octopod1Fitness.csv").st_size == 0):
+        allFitnessFile = open("finalProject/fitness/octopod1Fitness" + str(self.iteration) + ".csv", "a")
+        if (os.stat("finalProject/fitness/octopod1Fitness" + str(self.iteration) + ".csv").st_size == 0):
             allFitnessFile.write("Family,Parent,Child\n")
         for i in self.parents:
-            allFitnessFile.write(str(i) + "," + str(self.parents[i].fitness) + "," + str(self.children[i].fitness) + "\n")
+            allFitnessFile.write(str(i) + "," + str(round(self.parents[i].fitness, 4)) + "," + str(round(self.children[i].fitness, 4)) + "\n")
         allFitnessFile.close()
 
-        #write to matrix
+
 
 
     def Show_Best(self, num):
@@ -85,6 +97,8 @@ class PARALLEL_HILL_CLIMBER:
         print("")
         #move best brain to brains folder to save
         os.system('mv brain' + str(bestSolution.myID) + '.nndf finalProject/brains/octopod1/brain' + str(num) + '.nndf')
+
+        print(self.fitnessMat)
 
     def Evaluate(self, solutions):
         for i in range(c.populationSize):
