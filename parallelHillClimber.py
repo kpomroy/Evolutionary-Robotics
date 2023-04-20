@@ -1,5 +1,6 @@
 import constants as c
 import copy
+import numpy as np
 import os
 from solution import SOLUTION
 
@@ -8,6 +9,9 @@ class PARALLEL_HILL_CLIMBER:
     def __init__(self):
         os.system("rm brain*.nndf")
         os.system("rm fitness*.txt")
+        #create matrix for fitnesses
+        self.fitnessMat = np.zeros((c.populationSize,c.numberOfGenerations))
+        print(self.fitnessMat)
         self.nextAvailableID = 0
         self.parents = {}
         for i in range (c.populationSize):
@@ -54,12 +58,16 @@ class PARALLEL_HILL_CLIMBER:
                 os.system("rm brain" + str(deleteID) + ".nndf")
 
     def Print(self):
+        # write to csv
         allFitnessFile = open("finalProject/fitness/octopod1Fitness.csv", "a")
         if (os.stat("finalProject/fitness/octopod1Fitness.csv").st_size == 0):
             allFitnessFile.write("Family,Parent,Child\n")
         for i in self.parents:
             allFitnessFile.write(str(i) + "," + str(self.parents[i].fitness) + "," + str(self.children[i].fitness) + "\n")
         allFitnessFile.close()
+
+        #write to matrix
+
 
     def Show_Best(self, num):
         #initialize lowest (best) fitness
@@ -70,6 +78,7 @@ class PARALLEL_HILL_CLIMBER:
                 bestFitness = self.parents[i].fitness
                 bestSolution = self.parents[i]
         bestSolution.Start_Simulation("GUI")
+
         print("")
         print("Best fitness:", bestFitness)
         print("Best solution ID: " + str(bestSolution.myID))
