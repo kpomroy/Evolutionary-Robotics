@@ -71,7 +71,7 @@ class PARALLEL_HILL_CLIMBER:
         if (os.stat("finalProject/fitness/octopod2Fitness" + str(self.iteration) + ".csv").st_size == 0):
             allFitnessFile.write("Family,Parent,Child\n")
         for i in self.parents:
-            allFitnessFile.write(str(i) + "," + str(round(self.parents[i].fitness), 4) + "," + str(round(self.children[i].fitness, 4)) + "\n")
+            allFitnessFile.write(str(i) + "," + str(round(self.parents[i].fitness, 4)) + "," + str(round(self.children[i].fitness, 4)) + "\n")
         allFitnessFile.close()
 
     def Show_Best(self, num):
