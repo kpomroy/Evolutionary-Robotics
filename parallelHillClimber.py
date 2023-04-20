@@ -68,7 +68,7 @@ class PARALLEL_HILL_CLIMBER:
 
     def Print(self):
         allFitnessFile = open("finalProject/fitness/octopod2Fitness" + str(self.iteration) + ".csv", "a")
-        if (os.stat("finalProject/fitness/octopod2Fitness.csv").st_size == 0):
+        if (os.stat("finalProject/fitness/octopod2Fitness" + str(self.iteration) + ".csv").st_size == 0):
             allFitnessFile.write("Family,Parent,Child\n")
         for i in self.parents:
             allFitnessFile.write(str(i) + "," + str(round(self.parents[i].fitness), 4) + "," + str(round(self.children[i].fitness, 4)) + "\n")
