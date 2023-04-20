@@ -1,14 +1,19 @@
 import constants as c
 import copy
+import numpy as np
 import os
 from solution import SOLUTION
 
 class PARALLEL_HILL_CLIMBER:
 
-    def __init__(self):
+    def __init__(self, iteration):
         os.system("rm brain*.nndf")
         os.system("rm fitness*.txt")
+        #create matrix for fitnesses
+        self.fitnessMat = np.zeros(shape = (c.populationSize,c.numberOfGenerations))
         self.nextAvailableID = 0
+        self.generation = 0
+        self.iteration = iteration
         self.parents = {}
         for i in range (c.populationSize):
             self.parents[i] = SOLUTION(self.nextAvailableID)
@@ -45,6 +50,7 @@ class PARALLEL_HILL_CLIMBER:
 
     def Select(self):
         for i in self.parents:
+            self.fitnessMat[i][self.generation] = self.children[i].fitness
             if(self.parents[i].fitness > self.children[i].fitness):
                 self.parents[i] = self.children[i]
                 deleteID = self.parents[i].myID
@@ -52,14 +58,19 @@ class PARALLEL_HILL_CLIMBER:
             else:
                 deleteID = self.children[i].myID
                 os.system("rm brain" + str(deleteID) + ".nndf")
+        self.generation+=1
+
+        if(self.generation == c.numberOfGenerations):
+            np.savetxt('finalProject/fitness/hexapod1' + str(self.iteration) + '.txt' ,self.fitnessMat, fmt = '%.4f')
 
     def Print(self):
-        allFitnessFile = open("finalProject/fitness/hexapod1Fitness.csv", "a")
-        if (os.stat("finalProject/fitness/hexapod1Fitness.csv").st_size == 0):
+        allFitnessFile = open("finalProject/fitness/hexapod1Fitness" + str(self.iteration) + ".csv", "a")
+        if (os.stat("finalProject/fitness/hexapod1Fitness" + str(self.iteration) + ".csv").st_size == 0):
             allFitnessFile.write("Family,Parent,Child\n")
         for i in self.parents:
-            allFitnessFile.write(str(i) + "," + str(self.parents[i].fitness) + "," + str(self.children[i].fitness) + "\n")
+            allFitnessFile.write(str(i) + "," + str(round(self.parents[i].fitness, 4)) + "," + str(round(self.children[i].fitness, 4)) + "\n")
         allFitnessFile.close()
+
 
     def Show_Best(self, num):
         #initialize lowest (best) fitness
