@@ -60,8 +60,10 @@ class PARALLEL_HILL_CLIMBER:
                 os.system("rm brain" + str(deleteID) + ".nndf")
         self.generation+=1
 
-        if(self.generation == c.numberOfGenerations-1):
+        if(self.generation == c.numberOfGenerations):
             np.savetxt('finalProject/fitness/hexapod2' + str(self.iteration) + '.txt' ,self.fitnessMat, fmt = '%.4f')
+            np.save('finalProject/fitness/hexapod2' + str(self.iteration) + '.npy', self.fitnessMat)
+
 
 
     def Print(self):
