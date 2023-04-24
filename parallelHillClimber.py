@@ -62,6 +62,8 @@ class PARALLEL_HILL_CLIMBER:
 
         if(self.generation == c.numberOfGenerations):
             np.savetxt('finalProject/fitness/hexapod1' + str(self.iteration) + '.txt' ,self.fitnessMat, fmt = '%.4f')
+            np.save('finalProject/fitness/hexapod1' + str(self.iteration) + '.npy', self.fitnessMat)
+
 
     def Print(self):
         allFitnessFile = open("finalProject/fitness/hexapod1Fitness" + str(self.iteration) + ".csv", "a")
@@ -86,6 +88,8 @@ class PARALLEL_HILL_CLIMBER:
         print("Best solution ID: " + str(bestSolution.myID))
         print("i: " + str(num))
         print("")
+
+        #print(self.fitnessMat)
 
         #move best brain to brains folder to save
         os.system('mv brain' + str(bestSolution.myID) + '.nndf finalProject/brains/hexapod1/brain' + str(num) + '.nndf')
