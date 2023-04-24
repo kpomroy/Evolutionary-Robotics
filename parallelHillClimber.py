@@ -61,6 +61,7 @@ class PARALLEL_HILL_CLIMBER:
 
         if(self.generation == c.numberOfGenerations):
             np.savetxt('finalProject/fitness/quadruped' + str(self.iteration) + '.txt' ,self.fitnessMat, fmt = '%.4f')
+            np.save('finalProject/fitness/quadruped' + str(self.iteration) + '.npy', self.fitnessMat)
 
 
     def Print(self):
