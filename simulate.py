@@ -1,5 +1,7 @@
 from simulation import SIMULATION
+import createBody
 import sys
+import os
 
 try:
     directOrGUI = sys.argv[1]
@@ -10,6 +12,8 @@ try:
     solutionID = sys.argv[2]
 except:
     solutionID = 0
+
+os.system('python3 createBody.py')
 
 simulation = SIMULATION(directOrGUI, solutionID)
 
