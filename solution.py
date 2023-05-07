@@ -23,15 +23,19 @@ class SOLUTION:
         self.Create_Body()
         self.Create_Brain()
         os.system("python3 simulate.py " + directOrGUI + " " + str(self.myID) + " 2&>1 &")
+        time.sleep(1.5)
 
     def Wait_For_Simulation_To_End(self):
+        print("ENTERING WHILE LOOP WAIT FOR SIM TO END")
         while not os.path.exists("fitness" + str(self.myID) + ".txt"):
             time.sleep(0.01)
+        print("EXIT WHILE LOOP")
         fitnessFile = open("fitness" + str(self.myID) + ".txt", "r")
         self.fitness = float(fitnessFile.read())
         #print(self.fitness)
         fitnessFile.close()
         os.system("rm fitness" + str(self.myID) + ".txt")
+        print("REMOVED OLD FILES")
         
 
     def Create_World(self):

@@ -66,13 +66,15 @@ class PARALLEL_HILL_CLIMBER:
 
 
     def Print(self):
+        pass
+        '''
         allFitnessFile = open("finalProject/fitness/hexapod1Fitness" + str(self.iteration) + ".csv", "a")
         if (os.stat("finalProject/fitness/hexapod1Fitness" + str(self.iteration) + ".csv").st_size == 0):
             allFitnessFile.write("Family,Parent,Child\n")
         for i in self.parents:
             allFitnessFile.write(str(i) + "," + str(round(self.parents[i].fitness, 4)) + "," + str(round(self.children[i].fitness, 4)) + "\n")
         allFitnessFile.close()
-
+        '''
 
     def Show_Best(self, num):
         #initialize lowest (best) fitness
@@ -98,6 +100,7 @@ class PARALLEL_HILL_CLIMBER:
     def Evaluate(self, solutions):
         for i in range(c.populationSize):
             solutions[i].Start_Simulation("DIRECT")
+            print("OUT OF START SIMULATION")
         for i in range(c.populationSize):
             solutions[i].Wait_For_Simulation_To_End()
     
