@@ -18,8 +18,16 @@ quad8FitnessValues = np.load('finalProject/fitness/quadruped8.npy')
 quad9FitnessValues = np.load('finalProject/fitness/quadruped9.npy')
 
 #hexapod 1
-hex1FitnessValues = np.load('finalProject/fitness/hexapod10.npy')
-
+hex10FitnessValues = np.load('finalProject/fitness/hexapod10.npy')
+hex11FitnessValues = np.load('finalProject/fitness/hexapod11.npy')
+hex12FitnessValues = np.load('finalProject/fitness/hexapod12.npy')
+hex13FitnessValues = np.load('finalProject/fitness/hexapod13.npy')
+hex14FitnessValues = np.load('finalProject/fitness/hexapod14.npy')
+hex15FitnessValues = np.load('finalProject/fitness/hexapod15.npy')
+hex16FitnessValues = np.load('finalProject/fitness/hexapod16.npy')
+hex17FitnessValues = np.load('finalProject/fitness/hexapod17.npy')
+hex18FitnessValues = np.load('finalProject/fitness/hexapod18.npy')
+hex19FitnessValues = np.load('finalProject/fitness/hexapod19.npy')
 
 #hexapod 2
 hex20FitnessValues = np.load('finalProject/fitness/hexapod20.npy')
@@ -65,7 +73,16 @@ meanQuad8 = np.mean(quad8FitnessValues, axis = 0)
 meanQuad9 = np.mean(quad9FitnessValues, axis = 0)
 
 #hexapod 1
-meanHex1 = np.mean(hex1FitnessValues, axis = 0)
+meanHex10 = np.mean(hex10FitnessValues, axis = 0)
+meanHex11 = np.mean(hex11FitnessValues, axis = 0)
+meanHex12 = np.mean(hex12FitnessValues, axis = 0)
+meanHex13 = np.mean(hex13FitnessValues, axis = 0)
+meanHex14 = np.mean(hex14FitnessValues, axis = 0)
+meanHex15 = np.mean(hex15FitnessValues, axis = 0)
+meanHex16 = np.mean(hex16FitnessValues, axis = 0)
+meanHex17 = np.mean(hex17FitnessValues, axis = 0)
+meanHex18 = np.mean(hex18FitnessValues, axis = 0)
+meanHex19 = np.mean(hex19FitnessValues, axis = 0)
 
 #hexapod 2
 meanHex20 = np.mean(hex20FitnessValues, axis = 0)
@@ -97,8 +114,8 @@ meanOct29 = np.mean(oct29FitnessValues, axis = 0)
 
 print("mean quad0")
 print(meanQuad0)
-print("mean hex1")
-print(meanHex1)
+print("mean hex10")
+print(meanHex10)
 print("mean hex20")
 print(meanHex20)
 print("mean hex21")
@@ -117,6 +134,14 @@ for i in range(c.numberOfGenerations):
 print("mean quad all")
 print(meanQuadAll)
 
+#hexapod 1
+meanHex1All = np.zeros(c.numberOfGenerations)
+for i in range(c.numberOfGenerations):
+   meanHex1All[i] = (meanHex10[i] + meanHex11[i] + meanHex12[i] + meanHex13[i] + meanHex14[i] + meanHex15[i] + meanHex16[i] + meanHex17[i] + meanHex18[i] + meanHex19[i])/10
+
+print("mean hex1 all")
+print(meanHex1All)
+
 #hexapod 2
 meanHex2All = np.zeros(c.numberOfGenerations)
 for i in range(c.numberOfGenerations):
@@ -134,7 +159,7 @@ print("mean Oct2 all")
 print(meanOct2All)
 
 matplotlib.plot(meanQuadAll, label = "quadruped", linewidth = 1)
-matplotlib.plot(meanHex1, label = "hexapod1", linewidth = 2.5) 
+matplotlib.plot(meanHex1All, label = "hexapod1", linewidth = 2.5) 
 matplotlib.plot(meanHex2All, label = "hexapod2", linewidth = 2.5)
 matplotlib.plot(meanOct1, label = "octopod1", linewidth = 4)
 matplotlib.plot(meanOct2All, label = "octopod2", linewidth = 4)
