@@ -1,5 +1,5 @@
 from simulation import SIMULATION
-import createBody
+#import createBody
 import sys
 import os
 
@@ -13,7 +13,7 @@ try:
 except:
     solutionID = 0
 
-os.system('python3 createBody.py')
+#os.system('python3 createBody.py')
 
 simulation = SIMULATION(directOrGUI, solutionID)
 
