@@ -31,9 +31,7 @@ hex19FitnessValues = np.load('finalProject/fitness/hexapod19.npy')
 
 #hexapod 2
 hex20FitnessValues = np.load('finalProject/fitness/hexapod20.npy')
-print(hex20FitnessValues)
 hex21FitnessValues = np.load('finalProject/fitness/hexapod21.npy')
-print(hex21FitnessValues)
 hex22FitnessValues = np.load('finalProject/fitness/hexapod22.npy')
 hex23FitnessValues = np.load('finalProject/fitness/hexapod23.npy')
 hex24FitnessValues = np.load('finalProject/fitness/hexapod24.npy')
@@ -44,8 +42,16 @@ hex28FitnessValues = np.load('finalProject/fitness/hexapod28.npy')
 hex29FitnessValues = np.load('finalProject/fitness/hexapod29.npy')
 
 #octopod 1
-oct1FitnessValues = np.load('finalProject/fitness/octopod10.npy')
-#print(oct1FitnessValues)
+oct10FitnessValues = np.load('finalProject/fitness/octopod10.npy')
+oct11FitnessValues = np.load('finalProject/fitness/octopod11.npy')
+oct12FitnessValues = np.load('finalProject/fitness/octopod12.npy')
+oct13FitnessValues = np.load('finalProject/fitness/octopod13.npy')
+oct14FitnessValues = np.load('finalProject/fitness/octopod14.npy')
+oct15FitnessValues = np.load('finalProject/fitness/octopod15.npy')
+oct16FitnessValues = np.load('finalProject/fitness/octopod16.npy')
+oct17FitnessValues = np.load('finalProject/fitness/octopod17.npy')
+oct18FitnessValues = np.load('finalProject/fitness/octopod18.npy')
+oct19FitnessValues = np.load('finalProject/fitness/octopod19.npy')
 
 #octopod 2
 oct20FitnessValues = np.load('finalProject/fitness/octopod20.npy')
@@ -97,7 +103,16 @@ meanHex28 = np.mean(hex28FitnessValues, axis = 0)
 meanHex29 = np.mean(hex29FitnessValues, axis = 0)
 
 #octopod 1
-meanOct1 = np.mean(oct1FitnessValues, axis = 0)
+meanOct10 = np.mean(oct10FitnessValues, axis = 0)
+meanOct11 = np.mean(oct11FitnessValues, axis = 0)
+meanOct12 = np.mean(oct12FitnessValues, axis = 0)
+meanOct13 = np.mean(oct13FitnessValues, axis = 0)
+meanOct14 = np.mean(oct14FitnessValues, axis = 0)
+meanOct15 = np.mean(oct15FitnessValues, axis = 0)
+meanOct16 = np.mean(oct16FitnessValues, axis = 0)
+meanOct17 = np.mean(oct17FitnessValues, axis = 0)
+meanOct18 = np.mean(oct18FitnessValues, axis = 0)
+meanOct19 = np.mean(oct19FitnessValues, axis = 0)
 
 #octopod 2
 meanOct20 = np.mean(oct20FitnessValues, axis = 0)
@@ -111,7 +126,7 @@ meanOct27 = np.mean(oct27FitnessValues, axis = 0)
 meanOct28 = np.mean(oct28FitnessValues, axis = 0)
 meanOct29 = np.mean(oct29FitnessValues, axis = 0)
 
-
+'''
 print("mean quad0")
 print(meanQuad0)
 print("mean hex10")
@@ -120,10 +135,11 @@ print("mean hex20")
 print(meanHex20)
 print("mean hex21")
 print(meanHex21)
-print("mean oct1")
+print("mean oct10")
 print(meanOct1)
 print("mean oct20")
 print(meanOct20)
+'''
 
 # AVERAGE MEANS FROM DIFFERENT RUNS
 #quadruped
@@ -150,6 +166,14 @@ for i in range(c.numberOfGenerations):
 print("mean hex2 all")
 print(meanHex2All)
 
+#octopod 1
+meanOct1All = np.zeros(c.numberOfGenerations)
+for i in range(c.numberOfGenerations):
+   meanOct1All[i] = (meanOct10[i] + meanOct11[i] + meanOct12[i] + meanOct13[i] + meanOct14[i] + meanOct15[i] + meanOct16[i] + meanOct17[i] + meanOct18[i] + meanOct19[i])/10
+
+print("mean Oct1 all")
+print(meanOct1All)
+
 #octopod 2
 meanOct2All = np.zeros(c.numberOfGenerations)
 for i in range(c.numberOfGenerations):
@@ -161,7 +185,7 @@ print(meanOct2All)
 matplotlib.plot(meanQuadAll, label = "quadruped", linewidth = 1)
 matplotlib.plot(meanHex1All, label = "hexapod1", linewidth = 2.5) 
 matplotlib.plot(meanHex2All, label = "hexapod2", linewidth = 2.5)
-matplotlib.plot(meanOct1, label = "octopod1", linewidth = 4)
+matplotlib.plot(meanOct1All, label = "octopod1", linewidth = 4)
 matplotlib.plot(meanOct2All, label = "octopod2", linewidth = 4)
 
 matplotlib.xlabel("Generation")
@@ -169,13 +193,9 @@ matplotlib.ylabel("Average Fitness")
 matplotlib.title("Average fitness over 10 runs")
 
 
-
 handles, labels = matplotlib.gca().get_legend_handles_labels()
 by_label = OrderedDict(zip(labels, handles))
 matplotlib.legend(by_label.values(), by_label.keys())
-
-#add legend to plot
-#matplotlib.legend()
 
 #show plot
 matplotlib.show()
