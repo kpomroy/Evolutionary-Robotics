@@ -182,11 +182,12 @@ for i in range(c.numberOfGenerations):
 print("mean Oct2 all")
 print(meanOct2All)
 
-matplotlib.plot(meanQuadAll, label = "quadruped", linewidth = 1)
-matplotlib.plot(meanHex1All, label = "hexapod1", linewidth = 2.5) 
-matplotlib.plot(meanHex2All, label = "hexapod2", linewidth = 2.5)
-matplotlib.plot(meanOct1All, label = "octopod2", linewidth = 4)
-matplotlib.plot(meanOct2All, label = "octopod1", linewidth = 4)
+matplotlib.plot(meanQuadAll, label = "Quadruped", linewidth = 1)
+matplotlib.plot(meanHex1All, label = "Hexapod 1", linewidth = 2.5) 
+matplotlib.plot(meanHex2All, label = "Hexapod 2", linewidth = 2.5)
+matplotlib.plot(meanOct2All, label = "Octopod 1", linewidth = 4)
+matplotlib.plot(meanOct1All, label = "Octopod 2", linewidth = 4)
+
 
 matplotlib.xlabel("Generation")
 matplotlib.ylabel("Average Fitness")
